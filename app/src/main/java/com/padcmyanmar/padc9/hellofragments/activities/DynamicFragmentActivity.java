@@ -3,6 +3,7 @@ package com.padcmyanmar.padc9.hellofragments.activities;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
@@ -17,6 +18,9 @@ public class DynamicFragmentActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dynamic_fragment);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         Button btnFragmentOne = findViewById(R.id.btn_show_frag_one);
         btnFragmentOne.setOnClickListener(new View.OnClickListener() {
@@ -34,11 +38,19 @@ public class DynamicFragmentActivity extends AppCompatActivity {
             }
         });
 
-        Button btnFragmentThree = findViewById(R.id.btn_backstack_transaction);
+        Button btnFragmentThree = findViewById(R.id.btn_frag_two_backstack);
         btnFragmentThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFragmentTwoWithTransaction();
+                showFragmentTwoWithBackstack();
+            }
+        });
+
+        Button btnFragmentOneWithTransition = findViewById(R.id.btn_frag_one_transition);
+        btnFragmentOneWithTransition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFragmentOneWithTransaction();
             }
         });
     }
@@ -55,9 +67,17 @@ public class DynamicFragmentActivity extends AppCompatActivity {
                 .commit();
     }
 
-    private void showFragmentTwoWithTransaction() {
+    private void showFragmentTwoWithBackstack() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fl_container, TwoFragment.newInstance())
+                .addToBackStack(null)
+                .commit();
+    }
+    
+    private void showFragmentOneWithTransaction() {
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit)
+                .replace(R.id.fl_container, OneFragment.newInstance())
                 .addToBackStack(null)
                 .commit();
     }
