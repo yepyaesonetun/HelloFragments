@@ -1,4 +1,4 @@
-package com.padcmyanmar.padc9.hellofragments;
+package com.padcmyanmar.padc9.hellofragments.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.padcmyanmar.padc9.hellofragments.R;
 
 public class StaticFragmentActivity extends AppCompatActivity {
 
