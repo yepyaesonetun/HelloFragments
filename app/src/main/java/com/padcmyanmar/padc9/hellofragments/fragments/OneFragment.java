@@ -13,8 +13,14 @@ import com.padcmyanmar.padc9.hellofragments.R;
 
 public class OneFragment extends Fragment {
 
-    public static OneFragment newInstance() {
+
+    private static final String ARG_DATA_TO_FRAGMENT = "ARG_DATA_TO_FRAGMENT";
+
+    public static OneFragment newInstance(String dataToFragment) {
         OneFragment fragment = new OneFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(ARG_DATA_TO_FRAGMENT, dataToFragment);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
